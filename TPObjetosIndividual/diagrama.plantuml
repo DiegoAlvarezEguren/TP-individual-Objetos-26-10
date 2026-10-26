@@ -3,14 +3,16 @@ class Entradas{
     banda
     fecha
     precioBase
-    impuesto
-    
+    --
     precioFinal()
 }
 object productora {
     bandas
     asistentes
+    impuesto
     --
+    agregarBanda()
+    agregarAsistente()
     gananciaTotal()
     entradasVendidas()
     entradasVendidasTotal()
@@ -26,23 +28,23 @@ abstract Banda{
     popularidad()
 
 }
-class BandaRock{
+class BandaRock extends Banda{
     solosGitarra
     presupuesto()
     popularidad()
 }
-class BandaTrap{
+class BandaTrap extends Banda{
     hielo
     presupuesto()
     popularidad()
 }
-class BandaIndie{
+class BandaIndie extends Banda{
     cantidadInstrumentos
     --
     popularidad()
     presupuesto()
 }
-abstract Asistente{
+class Asistente{
     abono
     anioActual
     historialEntradas
@@ -55,13 +57,27 @@ abstract Asistente{
     entradasAnioAnterior()
     nombreBandasVistas()
 }
-class Fan{
-
+interface Abono  {
+    porcentajeDescuento()
+    bonificar()
 }
 
-class Vip{
+object abonoFan {
     --
-    ingresarDescuento(desc)
-    aumentarDescuento()
+    porcentajeDescuento()
+    bonificar()
 }
+
+class AbonoVip {
+    porcentajeDescuento
+    --
+    porcentajeDescuento()
+    bonificar()
+}
+productora --> "*" Asistente
+productora --> "*" Banda
+Asistente --> "*" Entradas
+Asistente --> Abono
+abonoFan .u.|> Abono
+AbonoVip .u.|> Abono
 @enduml
