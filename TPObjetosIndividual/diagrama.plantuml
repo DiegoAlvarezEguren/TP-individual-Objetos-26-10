@@ -1,0 +1,67 @@
+@startuml
+class Entradas{
+    banda
+    fecha
+    precioBase
+    impuesto
+    
+    precioFinal()
+}
+object productora {
+    bandas
+    asistentes
+    --
+    gananciaTotal()
+    entradasVendidas()
+    entradasVendidasTotal()
+    bandaMasPopular()
+    entradasVendidasDe(banda)
+    bonificarVIP()
+}
+class Banda{
+    nombre
+    canon
+    --
+    presupuesto()
+    popularidad()
+
+}
+class BandaRock{
+    solosGitarra
+    presupuesto()
+    popularidad()
+}
+class BandaTrap{
+    hielo
+    presupuesto()
+    popularidad()
+}
+class BandaIndie{
+    cantidadInstrumentos
+    --
+    popularidad()
+    presupuesto()
+}
+class Asistente{
+    abono
+    anioActual
+    historialEntradas
+    saldo
+    gastoTotal
+    descuento
+    --
+    precioDescontado(entrada)
+    comprarEntrada(entrada)
+    entradasAnioAnterior()
+    nombreBandasVistas()
+}
+class Fan{
+
+}
+
+class Vip{
+    --
+    ingresarDescuento(desc)
+    aumentarDescuento()
+}
+@enduml
