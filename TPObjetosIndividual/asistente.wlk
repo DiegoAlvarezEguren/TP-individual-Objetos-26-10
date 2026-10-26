@@ -1,7 +1,7 @@
 import entradas.*
 class Asistente{
     var property abono
-    var anioActual
+    const anioActual
     var property historialEntradas=[]
     var saldo
     var property gastoTotal
@@ -20,7 +20,7 @@ class Asistente{
         }
     }
     method entradasAnioAnterior(){
-        return historialEntradas.filter({entrada=>entrada.fecha().anio()==anioActual-1 })
+        return historialEntradas.filter({entrada=>entrada.fecha().year()==anioActual-1 })
     }
     method nombreBandasVistas(){
         return historialEntradas.map({entrada=>entrada.banda()})

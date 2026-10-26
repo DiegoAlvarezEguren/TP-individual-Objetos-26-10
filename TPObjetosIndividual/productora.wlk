@@ -2,9 +2,9 @@ import asistente.*
 import bandas.*
 import entradas.*
 object productora {
-    var bandas=[]
+    const bandas=[]
     var property asistentes=[]
-    const bandasYEntradasVendidas= new Dictionary()
+
     method gananciaTotal(){
         return (asistentes.map({asistente=>asistente.gastoTotal()})).sum()-(bandas.presupuesto().sum())
     }
@@ -13,8 +13,16 @@ object productora {
     }
     method entradasVendidasTotal(){
         return self.entradasVendidas().size()
-        
     }
+
+    method bandaMasPopular() {
+        return bandas.max({ banda => self.entradasVendidasDe(banda) })
+    }
+
+    method entradasVendidasDe(banda) {
+        return self.entradasVendidas().count({ entrada => entrada.banda() == banda })
+    }
+
 
     method bonificarVIP(){
         asistentes.filter({asistente=>asistente.abono()=="vip"}).aumentarDescuento()
