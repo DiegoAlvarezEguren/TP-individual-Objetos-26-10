@@ -18,7 +18,7 @@ object productora {
     entradasVendidasDe(banda)
     bonificarVIP()
 }
-class Banda{
+abstract Banda{
     nombre
     canon
     --
@@ -42,7 +42,7 @@ class BandaIndie{
     popularidad()
     presupuesto()
 }
-class Asistente{
+abstract Asistente{
     abono
     anioActual
     historialEntradas
