@@ -1,17 +1,18 @@
 import entradas.*
 class Asistente{
     var property abono
-    const anioActual
+
     var property historialEntradas=[]
-    var saldo
-    var property gastoTotal
-    var property descuento
+    var property saldo
+    var property gastoTotal = 0
+
     
-    method precioDescontado(entrada){
-        return (entrada.precioFinal())-((entrada.precioFinal())*descuento)
+    method precioDescontado(entrada) {
+        return entrada.precioFinal() * (1 - abono.porcentajeDescuento() / 100)
     }
-    method comprarEntrada(entrada){
+    method comprarEntrada(banda,fecha){
         if(saldo>0){
+            const entrada= new Entrada(banda=banda,fecha=fecha)
             saldo=saldo-self.precioDescontado(entrada)
             historialEntradas.add(entrada)
             gastoTotal=gastoTotal+entrada.precioFinal()
@@ -20,22 +21,15 @@ class Asistente{
         }
     }
     method entradasAnioAnterior(){
-        return historialEntradas.filter({entrada=>entrada.fecha().year()==anioActual-1 })
+        const anioPasado = new Date().year() - 1
+        return historialEntradas.filter({entrada=>entrada.fecha().year()==anioPasado })
     }
     method nombreBandasVistas(){
-        return historialEntradas.map({entrada=>entrada.banda()})
+        return historialEntradas.map({ entrada => entrada.banda().nombre() }).asSet().asList()
+    }
+
+    method bonificar(){
+        abono.bonificar()
     }
     
-}
-class Fan inherits Asistente(abono="fan",descuento=0){
-
-}
-
-class Vip inherits Asistente(abono="vip"){
-    method ingresarDescuento(desc){
-        descuento=desc
-    }
-    method aumentarDescuento(){
-        descuento=descuento+1
-    }
 }

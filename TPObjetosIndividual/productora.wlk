@@ -4,12 +4,18 @@ import entradas.*
 object productora {
     const bandas=[]
     var property asistentes=[]
-
+    var property impuesto=0
+    method agregarBanda(banda){
+        bandas.add(banda)
+    } 
+    method agregarAsistente(asistente){
+        asistentes.add(asistente) 
+    }
     method gananciaTotal(){
-        return (asistentes.map({asistente=>asistente.gastoTotal()})).sum()-(bandas.presupuesto().sum())
+        return (asistentes.map({asistente=>asistente.gastoTotal()})).sum()-(bandas.sum({ banda => banda.presupuesto() }))
     }
     method entradasVendidas(){
-        return asistentes.historialEntradas().flatten()
+        return asistentes.flatMap({ asistente => asistente.historialEntradas() })
     }
     method entradasVendidasTotal(){
         return self.entradasVendidas().size()
@@ -24,7 +30,7 @@ object productora {
     }
 
 
-    method bonificarVIP(){
-        asistentes.filter({asistente=>asistente.abono()=="vip"}).aumentarDescuento()
-    }
+    method bonificarVIP() {
+    asistentes.forEach({ asistente => asistente.bonificar() })
+  }
 }

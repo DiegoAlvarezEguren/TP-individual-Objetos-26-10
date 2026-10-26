@@ -1,11 +1,12 @@
-class Entradas{
+import productora.*
+class Entrada{
     var property banda
-    const fecha=new Date()
+    const property fecha=new Date()
     const precioBase = 1000
-    const impuesto
+
     
     method precioFinal(){
-        return precioBase + impuesto
+        return precioBase + productora.impuesto()
     }
 
 }
