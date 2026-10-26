@@ -1,5 +1,5 @@
 @startuml
-class Entradas{
+class Entrada{
     banda
     fecha
     precioBase
@@ -76,8 +76,10 @@ class AbonoVip {
 }
 productora --> "*" Asistente
 productora --> "*" Banda
-Asistente --> "*" Entradas
+Asistente --> "*" Entrada
 Asistente --> Abono
-abonoFan .u.|> Abono
-AbonoVip .u.|> Abono
+abonoFan ..|> Abono
+AbonoVip ..|> Abono
+Entrada -->productora
+Entrada --> Banda
 @enduml
