@@ -1,11 +1,12 @@
 import entradas.*
 class Asistente{
-    var abono
+    var property abono
     var anioActual
     var property historialEntradas=[]
     var saldo
     var property gastoTotal
     var property descuento
+    
     method precioDescontado(entrada){
         return (entrada.precioFinal())-((entrada.precioFinal())*descuento)
     }
@@ -24,6 +25,7 @@ class Asistente{
     method nombreBandasVistas(){
         return historialEntradas.map({entrada=>entrada.banda()})
     }
+    
 }
 class Fan inherits Asistente(abono="fan",descuento=0){
 
@@ -32,5 +34,8 @@ class Fan inherits Asistente(abono="fan",descuento=0){
 class Vip inherits Asistente(abono="vip"){
     method ingresarDescuento(desc){
         descuento=desc
+    }
+    method aumentarDescuento(){
+        descuento=descuento+1
     }
 }

@@ -5,7 +5,7 @@ class Entradas{
     var impuesto
     
     method precioFinal(){
-            return precioBase + impuesto
+        return precioBase + impuesto
     }
 
 }

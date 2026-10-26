@@ -1,12 +1,8 @@
 class Banda{
-    var asistentesEspectadores=[]
     const nombre
     const canon=1000000
     method presupuesto()
     method popularidad()
-    method Espectadores(){
-        
-    }
 
 }
 class BandaRock inherits Banda{
